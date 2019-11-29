@@ -1,15 +1,26 @@
 package com.example.demo;
 
+import com.example.demo.ctrl.WebHelloSpring;
 import com.example.demo.decoupled.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(
+        scanBasePackageClasses = WebHelloSpring.class
+)
 public class DemoApplication {
-    public static void main(String[] args) {
+    private static Logger logger =
+            LoggerFactory.getLogger(
+                    DemoApplication.class
+            );
+
+    public static void main(String[] args) throws Exception {
         System.out.println("Hello Spring");
 
         // Command Line Argument
@@ -51,7 +62,17 @@ public class DemoApplication {
 
         mr3.render();
 
-        SpringApplication.run(DemoApplication.class, args);
-    }
+        /* Let's Bring Up Web Application! */
+        ConfigurableApplicationContext ctx3 =
+                SpringApplication.run(
+                        DemoApplication.class,
+                        args
+                );
 
+        assert(ctx3 != null);
+        logger.info("Start Web Application!!!");
+
+        System.in.read();
+        ctx3.close();
+    }
 }
