@@ -76,3 +76,8 @@ public class DemoApplication {
         ctx3.close();
     }
 }
+
+/* 문제 1.
+   Annotation 을 활용하도록 합니다.
+   그리고 Web 페이지에
+   랜덤 숫자(3 ~ 33)를 출력하도록 만듭니다. */
