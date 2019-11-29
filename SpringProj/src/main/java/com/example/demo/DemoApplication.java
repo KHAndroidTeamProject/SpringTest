@@ -1,12 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.decoupled.HelloSpringMessageProvider;
-import com.example.demo.decoupled.MessageProvider;
-import com.example.demo.decoupled.MessageRenderer;
-import com.example.demo.decoupled.OutputMessageRenderer;
+import com.example.demo.decoupled.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
@@ -39,6 +37,19 @@ public class DemoApplication {
                 MessageRenderer.class
         );
         mr2.render();
+
+        // Annotation Based Action
+        ApplicationContext ctx2 =
+                new AnnotationConfigApplicationContext(
+                        HelloSpringConfiguration.class
+                );
+
+        MessageRenderer mr3 = ctx2.getBean(
+                "renderer",
+                MessageRenderer.class
+        );
+
+        mr3.render();
 
         SpringApplication.run(DemoApplication.class, args);
     }
