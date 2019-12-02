@@ -1,0 +1,39 @@
+
+server:
+  port: 7777
+
+spring:
+  profiles:
+    active: local
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+logging:
+  level:
+    root: info
+  file: log/demo.log
+  pattern:
+    console: "%d %-5level [%thread] %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+
+---
+#local profile
+spring:
+  jpa:
+    profiles: local
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: create-drop
+  datasource:
+    url: jdbc:h2:file:./db/localdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
