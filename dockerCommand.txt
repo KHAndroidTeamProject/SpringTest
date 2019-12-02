@@ -1,0 +1,2 @@
+docker run -d --restart=always --name local_redis -p 6379:6379 redis
+docker run -d --restart=always --name local_db -e POSTGRES_USER=localdb -e POSTGRES_PASSWORD=1234abcd -e POSTGRES_DB=localdb -p 5432:5432 postgres
